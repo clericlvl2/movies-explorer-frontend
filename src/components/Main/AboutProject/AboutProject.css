@@ -1,0 +1,49 @@
+.about-project {
+  background: #202020;
+}
+
+.about-project__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 110px 40px;
+}
+
+.about-project__timeline-container {
+  display: flex;
+  justify-content: stretch;
+  grid-column: 1 / 3;
+}
+
+.about-project__timeline-backend {
+  flex-grow: 1;
+}
+
+.about-project__timeline-frontend {
+  flex-grow: 4;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__content {
+    gap: 94px 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 56px;
+  }
+
+  .about-project__timeline-container {
+    margin-top: 4px;
+    grid-column: 1 / 2;
+  }
+}
+
