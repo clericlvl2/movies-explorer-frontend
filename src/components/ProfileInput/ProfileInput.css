@@ -1,0 +1,31 @@
+.profile-input{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px 0;
+  border: 1px solid transparent;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.profile-input_separated {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-input__label{
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.profile-input__input {
+  width: 100%;
+  text-align: end;
+  background: none;
+  border: none;
+  color: #FFF;
+  box-sizing: border-box;
+}
+
+.profile-input__input:focus {
+  outline: none;
+}

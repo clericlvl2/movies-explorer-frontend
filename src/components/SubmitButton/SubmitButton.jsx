@@ -1,7 +1,7 @@
 import Spinner from "../Spinner/Spinner";
 import './SubmitButton.css'
 
-const SubmitButton = ({ isLoading, className, label = 'Нажми меня' }) => (
+const SubmitButton = ({ isLoading = false, className = '', label = 'Нажми меня' }) => (
   <button
     type="submit"
     className={`submit-button ${isLoading ? 'submit-button_disabled' : ''} ${className}`}
