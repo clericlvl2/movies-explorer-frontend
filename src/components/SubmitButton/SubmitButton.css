@@ -1,0 +1,27 @@
+.submit-button {
+  width: 100%;
+  min-height: 45px;
+  margin-top: 69px;
+  background: #4285F4;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  color: #FFF;
+  text-align: center;
+  transition: opacity .24s;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  opacity: .85;
+}
+
+.submit-button_disabled {
+  opacity: 0.85;
+}
+
+.submit-button_disabled:hover {
+  opacity: 0.85;
+}

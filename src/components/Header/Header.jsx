@@ -1,3 +1,4 @@
+import Logo from "../Logo/Logo";
 import { useResize } from "../../hooks/useResize";
 import './Header.css';
 
@@ -11,8 +12,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="header__logo"/>
-
+      <Logo className="header__logo"/>
       {isDesktop ? (
         <div className="header__content">
           <nav>
@@ -40,7 +40,7 @@ const Header = () => {
           </div>
         </div>
       ) : (
-          <div className="header__burger-menu header__link" />
+        <div className="header__burger-menu header__link"/>
       )}
 
     </header>
