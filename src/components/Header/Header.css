@@ -98,7 +98,6 @@
   opacity: .8;
 }
 
-/* FIXME прокидывать в header цвет для кнопки, прозрачность не по макету */
 .header__account-logo {
   background: url("./../../images/icons/account.svg") rgba(255, 255, 255, .1) center no-repeat;
   width: 26px;

@@ -71,6 +71,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .promo {
+    background-size: 248px 248px;
+  }
+
   .promo__header-container {
     padding: 0 10px;
   }

@@ -7,7 +7,7 @@
   gap: 10px;
   color: #FFF;
   text-decoration: none;
-  border-bottom: 1px solid #424242;
+  border-bottom: 1px solid var(--border-color);
   transition: opacity .2s;
   cursor: pointer;
 }

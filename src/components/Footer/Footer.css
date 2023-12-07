@@ -28,7 +28,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #424242;
+  border-top: 1px solid var(--border-color);
 }
 
 .footer__nav-list {
@@ -40,7 +40,6 @@
   list-style: none;
 }
 
-/* FIXME одинаковый стиль на ссылки, что делать */
 .footer__link {
   transition: opacity .2s;
   text-decoration: none;

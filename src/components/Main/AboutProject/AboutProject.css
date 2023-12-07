@@ -1,11 +1,6 @@
-.about-project {
-  background: #202020;
-}
-
 .about-project__content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid: 1fr 72px / 1fr 1fr;
   gap: 110px 40px;
 }
 
