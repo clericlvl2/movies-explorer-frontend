@@ -3,7 +3,12 @@ import SectionLayout from "../../Main/SectionLayout/SectionLayout";
 import { getMovies } from "../../../utils/mocks/movies";
 import "./MoviesGallery.css"
 
-const MoviesGallery = () => {
+const MAX_GALLERY_SIZE = 12;
+
+const MoviesGallery = ({ isFavoriteView }) => {
+  const movies = getMovies().slice(0, MAX_GALLERY_SIZE);
+  const moviesOnPage = isFavoriteView ? movies.filter(movie => movie.isFavorite) : movies;
+
   return (
     <SectionLayout
       className="movies-gallery"
@@ -11,16 +16,17 @@ const MoviesGallery = () => {
       isWideSection
     >
       <ul className="movies-gallery__list">
-        {getMovies().map(movie => (
+        {moviesOnPage.map(movie => (
           <li>
             <MovieCard
               key={movie._id}
               movie={movie}
+              isFavoriteView={isFavoriteView}
             />
           </li>
         ))}
       </ul>
-      <button className="movies-gallery__more-button">Ещё</button>
+      {!isFavoriteView && <button className="movies-gallery__more-button">Ещё</button>}
     </SectionLayout>
   )
 }

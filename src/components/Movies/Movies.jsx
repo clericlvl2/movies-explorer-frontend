@@ -1,11 +1,11 @@
 import MoviesGallery from "./MoviesGallery/MoviesGallery";
 import SearchForm from "./SearchForm/SearchForm";
 
-const Movies = () => {
+const Movies = ({ isFavoriteView = false }) => {
   return (
     <main>
       <SearchForm />
-      <MoviesGallery />
+      <MoviesGallery isFavoriteView={isFavoriteView} />
     </main>
   )
 }

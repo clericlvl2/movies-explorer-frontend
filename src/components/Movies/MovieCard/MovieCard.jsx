@@ -1,9 +1,16 @@
-import { OWNER_ID } from "../../../utils/mocks/movies";
+import { getClassName } from "../../../utils/helpers";
 import "./MovieCard.css"
 
-const MovieCard = ({ movie }) => {
-  const isOwn = movie.ownerId === OWNER_ID;
-  const cardLikeButtonClassName = `movie-card__fav-button${movie.isFavorite ? ' movie-card__fav-button_active' : ''}`;
+const MovieCard = ({ movie, isFavoriteView }) => {
+  const favButtonClassName = getClassName(
+    'movie-card__fav-button',
+    movie.isFavorite ? ' movie-card__fav-button_active' : ''
+  );
+
+  const buttonClassName = getClassName(
+    'movie-card__button',
+    isFavoriteView ? 'movie-card__close-button' : favButtonClassName
+  );
 
   return (
     <div className="movie-card">
@@ -15,7 +22,7 @@ const MovieCard = ({ movie }) => {
       <div className="movie-card__info">
         <h2 className="movie-card__title">{movie.name}</h2>
         <span className="movie-card__subtitle">{movie.duration}</span>
-        <button type="button" className={cardLikeButtonClassName}/>
+        <button type="button" className={buttonClassName}/>
       </div>
     </div>
   )
