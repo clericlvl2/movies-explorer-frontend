@@ -12,24 +12,8 @@
   align-items: center;
 }
 
-.header__content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-grow: 1;
-}
-
 .header__logo {
   margin-right: 45px;
-}
-
-.header__nav-list {
-  display: flex;
-  gap: 16px;
-  margin-right: 45px;
-  padding: 0;
-  list-style: none;
-
 }
 
 .header__link {
@@ -43,66 +27,9 @@
   opacity: .6;
 }
 
-.header__page-link {
-  white-space: nowrap;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-.header__account-button {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 0;
-  padding: 0;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 12px;
-  background: none;
-  color: #FFF;
-  border: none;
-}
-
-.header__auth {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.header__signup-link {
-  font-size: 12px;
-  line-height: 16px;
-}
-
-.header__auth-text {
-  font-size: 12px;
-  line-height: 16px;
-}
-
-.header__auth-button {
-  width: 76px;
-  height: 32px;
-  background: #3DDC84;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: opacity .2s;
-}
-
-.header__auth-button:hover {
-  opacity: .8;
-}
-
-.header__account-logo {
-  background: url("./../../images/icons/account.svg") rgba(255, 255, 255, .1) center no-repeat;
-  width: 26px;
-  height: 26px;
-  margin-right: 45px;
-  border-radius: 50%;
-}
-
 .header__burger-menu {
+  border: none;
+  outline: none;
   width: 44px;
   height: 44px;
   margin-left: auto;
@@ -117,6 +44,6 @@
 
 @media screen and (max-width: 480px) {
   .header {
-    width: calc(100% - 10px * 2);
+    width: calc(100% - 14px * 2);
   }
 }

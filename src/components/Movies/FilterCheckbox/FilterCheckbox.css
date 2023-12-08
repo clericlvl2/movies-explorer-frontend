@@ -66,12 +66,10 @@
   transform: translateX(18px);
 }
 
-/* Hover */
 .filter-checkbox__checkbox .filter-checkbox__input:not(:disabled) + .filter-checkbox__switcher {
   cursor: pointer;
 }
 
-/* Disabled */
 .filter-checkbox__checkbox .filter-checkbox__input:disabled + .filter-checkbox__switcher {
   filter: grayscale(70%);
   border-color: rgba(0, 0, 0, .1);
@@ -81,7 +79,6 @@
   background: #EEE;
 }
 
-/* Focus */
 .filter-checkbox__checkbox:focus-within .filter-checkbox__switcher {
   border: 1px solid #000;
   outline: 1px solid #FFF;

@@ -1,13 +1,13 @@
-import { getClassName } from "../../../utils/helpers";
+import { cn } from "../../../utils/helpers";
 import "./MovieCard.css"
 
 const MovieCard = ({ movie, isFavoriteView }) => {
-  const favButtonClassName = getClassName(
+  const favButtonClassName = cn(
     'movie-card__fav-button',
     movie.isFavorite ? ' movie-card__fav-button_active' : ''
   );
 
-  const buttonClassName = getClassName(
+  const buttonClassName = cn(
     'movie-card__button',
     isFavoriteView ? 'movie-card__close-button' : favButtonClassName
   );
