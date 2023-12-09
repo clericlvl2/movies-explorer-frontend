@@ -17,9 +17,8 @@ const MoviesGallery = ({ isFavoriteView }) => {
     >
       <ul className="movies-gallery__list">
         {moviesOnPage.map(movie => (
-          <li>
+          <li key={movie._id}>
             <MovieCard
-              key={movie._id}
               movie={movie}
               isFavoriteView={isFavoriteView}
             />

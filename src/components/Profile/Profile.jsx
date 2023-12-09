@@ -9,19 +9,18 @@ const DEFAULT_FORM_VALUES = {
   email: 'test@example.com'
 }
 
-const Profile = () => {
+const Profile = ({ onLogOut }) => {
   const { values, handleChange } = useForm(DEFAULT_FORM_VALUES);
   const [isEditMode, setIsEditMode] = useState(false);
 
   const toggleEditMode = () => setIsEditMode(mode => !mode);
-  const executeLogOut = () => null;
 
   const onSubmit = (evt) => {
     evt.preventDefault();
     toggleEditMode();
   }
   return (
-    <section className="profile">
+    <main className="profile">
       <form className="profile__form" onSubmit={onSubmit}>
         <h1 className="profile__title">Привет, Артем!</h1>
         <ProfileInput
@@ -65,7 +64,7 @@ const Profile = () => {
               <button
                 className="profile__button profile__button_type_logout "
                 type="button"
-                onClick={executeLogOut}
+                onClick={onLogOut}
               >
                 Выйти из аккаунта
               </button>
@@ -74,7 +73,7 @@ const Profile = () => {
 
         </div>
       </form>
-    </section>
+    </main>
   );
 }
 

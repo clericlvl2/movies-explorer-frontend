@@ -4,7 +4,7 @@ import "./MovieCard.css"
 const MovieCard = ({ movie, isFavoriteView }) => {
   const favButtonClassName = cn(
     'movie-card__fav-button',
-    movie.isFavorite ? ' movie-card__fav-button_active' : ''
+    movie.isFavorite && ' movie-card__fav-button_active'
   );
 
   const buttonClassName = cn(

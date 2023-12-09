@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import AuthLayout from "../AuthLayout/AuthLayout";
 import AuthInput from "../AuthInput/AuthInput";
 import { useForm } from "../../hooks/useForm";
+import UserContext from "../../contexts/UserContext";
+import { PATH } from "../../utils/constants";
 
 const DEFAULT_FORM_VALUES = {
   email: '',
@@ -9,19 +12,21 @@ const DEFAULT_FORM_VALUES = {
 
 const Login = () => {
   const { values, handleChange } = useForm(DEFAULT_FORM_VALUES);
+  const { logIn } = useContext(UserContext)
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    logIn();
   }
 
   return (
     <AuthLayout
       title="Рады видеть!"
       hint="Ещё не зарегистрированы?"
+      linkURL={PATH.SIGN_UP}
       linkCaption="Регистрация"
       submitCaption="Войти"
       onSubmit={onSubmit}
-      isLoading
     >
       <AuthInput
         label="E-mail"

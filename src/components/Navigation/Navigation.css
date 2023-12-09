@@ -1,8 +1,11 @@
 .navigation {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 45px;
+  flex-grow: 1;
+}
+
+.navigation__nav-container {
   flex-grow: 1;
 }
 
@@ -83,6 +86,10 @@
 @media screen and (max-width: 768px) {
   .navigation {
     flex-direction: column;
+  }
+
+  .navigation__nav-container:empty {
+    flex-grow: 0;
   }
 
   .navigation__nav-list {

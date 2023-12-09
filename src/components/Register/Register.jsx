@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import AuthLayout from "../AuthLayout/AuthLayout";
 import AuthInput from "../AuthInput/AuthInput";
 import { useForm } from "../../hooks/useForm";
+import { PATH, ROUTE } from "../../utils/constants";
 
 const DEFAULT_FORM_VALUES = {
   name: '',
@@ -10,15 +12,20 @@ const DEFAULT_FORM_VALUES = {
 
 const Register = () => {
   const { values, handleChange } = useForm(DEFAULT_FORM_VALUES);
+  const navigate = useNavigate();
+
+  const toSignIn = () => navigate(ROUTE.SIGN_IN, {replace: true});
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    toSignIn();
   }
 
   return (
     <AuthLayout
       title="Добро пожаловать!"
       hint="Уже зарегистрированы?"
+      linkURL={PATH.SIGN_IN}
       linkCaption="Войти"
       submitCaption="Зарегистрировться"
       onSubmit={onSubmit}

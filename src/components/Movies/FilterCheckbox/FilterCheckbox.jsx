@@ -2,7 +2,7 @@ import "./FilterCheckbox.css"
 
 const FilterCheckbox = (props) => {
   return (
-    <div className="filter-checkbox__container">
+    <div className="filter-checkbox">
       <label className="filter-checkbox__checkbox" htmlFor="short-movie-checkbox">
         <input
           {...props}

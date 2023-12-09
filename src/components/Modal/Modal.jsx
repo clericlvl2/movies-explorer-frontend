@@ -5,6 +5,7 @@ import { cn } from "../../utils/helpers";
 import "./Modal.css"
 
 const Modal = ({
+  isLogged,
   isOpen,
   onClose,
 }) => {
@@ -22,10 +23,10 @@ const Modal = ({
   }
 
   return (
-    <div className={cn('modal', isOpen ? 'modal_opened' : '')}>
+    <div className={cn('modal', isOpen && 'modal_opened')}>
       <div className="modal__container">
-        <Navigation isLogged={false}/>
-        <button type="button" className="modal__close-button" onClick={onClose}/>
+        <Navigation isLogged={isLogged} onLinkClick={onClose} />
+        <button type="button" className="modal__close-button" onClick={onClose} />
       </div>
     </div>
   );

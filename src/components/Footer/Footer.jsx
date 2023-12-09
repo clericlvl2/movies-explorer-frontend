@@ -1,15 +1,20 @@
+import { useLocation } from "react-router-dom";
+import { ROUTE, CURRENT_YEAR } from "../../utils/constants";
 import './Footer.css';
 
 const Footer = () => {
-  const today = new Date();
-  const currentYear = today.getFullYear();
+  const { pathname } = useLocation();
+
+  if (pathname === `/${ROUTE.PROFILE}`) {
+    return null;
+  }
 
   return (
     <footer className="footer">
       <span className="footer__text footer__label">Учебный проект Яндекс.Практикум х&nbsp;BeatFilm.</span>
 
       <div className="footer__info">
-        <span className="footer__text">©&nbsp;{currentYear}</span>
+        <span className="footer__text">©&nbsp;{CURRENT_YEAR}</span>
         <nav>
           <ul className="footer__nav-list">
             <li>

@@ -6,7 +6,7 @@ import './AboutMe.css'
 
 const AboutMe = () => {
   return (
-    <SectionLayout className="about-me">
+    <SectionLayout className="about-me" id="about-me">
       <SectionTitle title="Студент"/>
 
 
