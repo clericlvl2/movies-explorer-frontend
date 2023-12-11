@@ -25,6 +25,7 @@ const SearchForm = () => {
         <div className="search-form__input-container">
           <label htmlFor="movie-input"/>
           <input
+            required
             className="search-form__input"
             id="movie-input"
             name="movie"
@@ -37,7 +38,12 @@ const SearchForm = () => {
           <button className="search-form__submit-button" type="submit" />
         </div>
 
-        <FilterCheckbox name="isShortMovie" value={values.isShortMovie} onChange={handleChange}/>
+        <FilterCheckbox
+          label="Короткометражки"
+          name="isShortMovie"
+          value={values.isShortMovie}
+          onChange={handleChange}
+        />
       </form>
     </SectionLayout>
   )

@@ -28,6 +28,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .info-column {
+    gap: 16px;
+  }
+
   .info-column__title {
     font-size: 18px;
     line-height: 22px;

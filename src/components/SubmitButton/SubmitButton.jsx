@@ -1,5 +1,5 @@
 import Spinner from "../Spinner/Spinner";
-import './SubmitButton.css'
+import "./SubmitButton.css"
 
 const SubmitButton = ({ isLoading = false, className = '', label = 'Нажми меня' }) => (
   <button

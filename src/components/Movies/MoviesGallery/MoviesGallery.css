@@ -25,7 +25,7 @@
 .movies-gallery__more-button {
   width: 100%;
   min-height: 36px;
-  margin: 60px 0 0 0;
+  margin: 0;
   background: #2F2F2F;
   border: none;
   border-radius: 6px;
@@ -44,14 +44,18 @@
 
 @media screen and (max-width: 768px) {
   .movies-gallery__list {
-    grid: auto-flow 281px / repeat(auto-fit, minmax(300px, 1fr));
+    grid: auto-flow 262px / repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
   }
 }
 
 @media screen and (max-width: 480px) {
+  .movies-gallery__content {
+    padding-top: 40px;
+  }
+
   .movies-gallery__list {
-    grid: auto-flow 237px / repeat(auto-fill, 1fr);
+    grid: auto-flow 237px / repeat(auto-fill, minmax(300px, 1fr));
     row-gap: 14px;
   }
 }

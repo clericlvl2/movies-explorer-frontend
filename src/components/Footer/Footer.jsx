@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { ROUTE, CURRENT_YEAR } from "../../utils/constants";
-import './Footer.css';
+import "./Footer.css";
 
 const Footer = () => {
   const { pathname } = useLocation();

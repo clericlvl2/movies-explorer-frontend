@@ -3,28 +3,29 @@ import { PATH } from "../../utils/constants";
 import { cn } from "../../utils/helpers";
 import "./Navigation.css"
 
-const Navigation = ({ isLogged, onLinkClick }) => {
+const Navigation = ({ isLogged, onLinkClick, showMainLink = true }) => {
   const { pathname } = useLocation();
-
 
   return (
     <div className="navigation">
-      <nav className="navigation__nav-container">
-        {isLogged && (
-          <ul className="navigation__nav-list">
-            <li>
-              <Link
-                className={cn(
-                  'navigation__link',
-                  'navigation__page-link',
-                  pathname === PATH.MAIN && 'navigation__page-link_active'
-                )}
-                to={PATH.MAIN}
-                onClick={onLinkClick}
-              >
-                Главная
-              </Link>
-            </li>
+      {isLogged ? (
+        <nav className="navigation__pages-nav">
+          <ul className="navigation__nav-list navigation__nav-list_type_pages">
+            {showMainLink && (
+              <li>
+                <Link
+                  className={cn(
+                    'navigation__link',
+                    'navigation__page-link',
+                    pathname === PATH.MAIN && 'navigation__page-link_active'
+                  )}
+                  to={PATH.MAIN}
+                  onClick={onLinkClick}
+                >
+                  Главная
+                </Link>
+              </li>
+            )}
             <li>
               <Link
                 className={cn(
@@ -48,14 +49,11 @@ const Navigation = ({ isLogged, onLinkClick }) => {
                 to={PATH.SAVED_MOVIES}
                 onClick={onLinkClick}
               >
-                Сохранённые</Link>
+                Сохранённые фильмы
+              </Link>
             </li>
           </ul>
-        )}
-      </nav>
 
-      <div className="navigation__account">
-        {isLogged ? (
           <Link
             className="navigation__link navigation__account-button"
             to={PATH.PROFILE}
@@ -64,32 +62,32 @@ const Navigation = ({ isLogged, onLinkClick }) => {
             Аккаунт
             <div className="navigation__account-logo" />
           </Link>
-        ) : (
-          <nav>
-            <ul className="navigation__nav-list navigation__nav-list_type_account">
-              <li className="navigation__nav-list-item">
-                <Link
-                  className="navigation__link"
-                  to={PATH.SIGN_UP}
-                  onClick={onLinkClick}
-                >
-                  Регистрация
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="navigation__link navigation__link-button"
-                  to={PATH.SIGN_IN}
-                  onClick={onLinkClick}
-                >
-                  Войти
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        )
-        }
-      </div>
+        </nav>
+      ) : (
+        <nav className="navigation__auth-nav">
+          <ul className="navigation__nav-list navigation__nav-list_type_auth">
+            <li className="navigation__nav-list-item">
+              <Link
+                className="navigation__link"
+                to={PATH.SIGN_UP}
+                onClick={onLinkClick}
+              >
+                Регистрация
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="navigation__link navigation__link-button"
+                to={PATH.SIGN_IN}
+                onClick={onLinkClick}
+              >
+                Войти
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      )}
+
     </div>
   )
 }

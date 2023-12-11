@@ -1,6 +1,6 @@
 import SectionTitle from "../SectionTitle/SectionTitle";
 import SectionLayout from "../SectionLayout/SectionLayout";
-import './Techs.css'
+import "./Techs.css"
 
 const TECH_STACK = [
   'HTML',
@@ -14,7 +14,7 @@ const TECH_STACK = [
 
 const Techs = () => {
   return (
-    <SectionLayout className="techs" id="techs">
+    <SectionLayout className="techs" contentClassName="techs__content" id="techs">
       <SectionTitle title="Технологии"/>
 
         <h3 className="techs__title">7 технологий</h3>

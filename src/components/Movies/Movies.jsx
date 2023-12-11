@@ -1,10 +1,9 @@
 import MoviesGallery from "./MoviesGallery/MoviesGallery";
 import SearchForm from "./SearchForm/SearchForm";
-import "./Movies.css"
 
 const Movies = ({ isFavoriteView = false }) => {
   return (
-    <main className="movies">
+    <main>
       <SearchForm />
       <MoviesGallery isFavoriteView={isFavoriteView} />
     </main>

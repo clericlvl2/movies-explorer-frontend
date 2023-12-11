@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import './AuthInput.css'
+import "./AuthInput.css"
 
 const AuthInput = forwardRef(({ label, htmlFor, id, className, ...props }, ref) => {
   return (

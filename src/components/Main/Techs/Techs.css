@@ -2,8 +2,12 @@
   background: #272727;
 }
 
+.techs__content {
+  padding: 100px 0;
+}
+
 .techs__title {
-  margin: 0 0 26px 0;
+  margin: 16px 0 26px 0;
   padding: 0;
   font-size: 50px;
   font-weight: 400;
@@ -48,8 +52,12 @@
 
 
 @media screen and (max-width: 768px) {
+  .techs__content {
+    padding: 90px 0;
+  }
+
   .techs__title {
-    margin-bottom: 22px;
+    margin: 10px 0 22px 0;
   }
 
   .techs__subtitle {
@@ -59,6 +67,8 @@
   }
 
   .techs__list {
+    width: calc(100% - 50px * 2);
+    margin: 0 auto;
     grid: auto-flow 57px / repeat(auto-fit, 84px);
   }
 
@@ -69,8 +79,12 @@
 }
 
 @media screen and (max-width: 480px) {
+  .techs__content {
+    padding: 70px 0;
+  }
+
   .techs__title {
-    margin-bottom: 24px;
+    margin: 0 0 24px 0;
     font-size: 30px;
     line-height: 36px;
   }
@@ -80,6 +94,7 @@
     line-height: 16px;
     margin-bottom: 50px;
   }
+
 
   .techs__list-item {
     font-size: 12px;

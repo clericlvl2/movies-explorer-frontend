@@ -25,7 +25,14 @@ const MoviesGallery = ({ isFavoriteView }) => {
           </li>
         ))}
       </ul>
-      {!isFavoriteView && <button className="movies-gallery__more-button">Ещё</button>}
+      {!isFavoriteView && (
+        <button
+          type="button"
+          className="movies-gallery__more-button"
+        >
+          Ещё
+        </button>
+      )}
     </SectionLayout>
   )
 }

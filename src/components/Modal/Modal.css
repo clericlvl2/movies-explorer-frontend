@@ -26,7 +26,6 @@
   padding: 160px 90px 90px 90px;
   box-sizing: border-box;
   background: #202020;
-  border-radius: 10px;
   /*box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);*/
 }
 
@@ -42,8 +41,8 @@
   width: 22px;
   height: 22px;
   position: absolute;
-  top: 22px;
-  right: 22px;
+  top: 26px;
+  right: 26px;
   margin: 0;
   padding: 0;
   border: none;
@@ -62,8 +61,8 @@
   }
 
   .modal__close-button {
-    top: 12px;
-    right: 12px;
+    top: 18px;
+    right: 18px;
   }
 }
 

@@ -5,6 +5,8 @@
   min-width: 288px;
   margin: 0 auto;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: 'Inter', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;

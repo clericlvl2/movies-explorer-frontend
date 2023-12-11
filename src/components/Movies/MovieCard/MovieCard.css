@@ -14,9 +14,9 @@
   width: 100%;
   display: grid;
   grid: 30px 1fr / 1fr 30px;
-  row-gap: 7px;
+  row-gap: 10px;
   margin: 0 auto;
-  padding: 14px;
+  padding: 9px 16px 16px 16px;
   align-items: center;
 }
 
@@ -90,6 +90,26 @@
 .movie-card__image:hover {
   filter: brightness(80%);
 }
+
+@media screen and (max-width: 768px) {
+  .movie-card__image {
+    min-height: 190px;
+    max-height: 190px;
+  }
+
+  .movie-card__info {
+    padding: 8px 14px 14px 14px;
+    row-gap: 7px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movie-card__image {
+    min-height: 168px;
+    max-height: 168px;
+  }
+}
+
 
 
 

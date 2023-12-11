@@ -1,8 +1,5 @@
 .header {
-  position: absolute;
-  top: 0;
-  right: 50%;
-  transform: translateX(50%);
+  z-index: 1;
   width: calc(100% - 70px * 2);
   max-width: 1140px;
   min-width: 288px;

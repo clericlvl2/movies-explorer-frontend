@@ -1,3 +1,7 @@
+.about-me__content {
+  padding-bottom: 105px;
+}
+
 .about-me__personal-info {
   width: 100%;
   display: grid;
@@ -78,7 +82,17 @@
   color: #8B8B8B;
 }
 
+.about-me__portfolio-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 @media screen and (max-width: 768px) {
+  .about-me__content {
+    padding-bottom: 70px;
+  }
+
   .about-me__personal-info {
     grid: 1fr / minmax(min-content, 364px) 255px;
     margin-bottom: 90px;
@@ -117,6 +131,10 @@
 
 
 @media screen and (max-width: 480px) {
+  .about-me__content {
+    padding-bottom: 50px;
+  }
+
   .about-me__personal-info {
     display: flex;
     flex-direction: column-reverse;

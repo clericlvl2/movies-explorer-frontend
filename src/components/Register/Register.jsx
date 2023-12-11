@@ -2,7 +2,14 @@ import { useNavigate } from "react-router-dom";
 import AuthLayout from "../AuthLayout/AuthLayout";
 import AuthInput from "../AuthInput/AuthInput";
 import { useForm } from "../../hooks/useForm";
-import { PATH, ROUTE } from "../../utils/constants";
+import {
+  MAX_NAME_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MIN_NAME_LENGTH,
+  MIN_PASSWORD_LENGTH,
+  PATH,
+  ROUTE
+} from "../../utils/constants";
 
 const DEFAULT_FORM_VALUES = {
   name: '',
@@ -31,8 +38,10 @@ const Register = () => {
       onSubmit={onSubmit}
     >
       <AuthInput
-        label="E-mail"
+        label="Имя"
         required
+        min={MIN_NAME_LENGTH}
+        max={MAX_NAME_LENGTH}
         id="name-register"
         name="name"
         type="text"
@@ -53,6 +62,8 @@ const Register = () => {
       <AuthInput
         label="Пароль"
         required
+        min={MIN_PASSWORD_LENGTH}
+        max={MAX_PASSWORD_LENGTH}
         id="password-register"
         name="password"
         type="password"

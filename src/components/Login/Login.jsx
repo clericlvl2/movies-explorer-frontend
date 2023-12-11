@@ -3,7 +3,7 @@ import AuthLayout from "../AuthLayout/AuthLayout";
 import AuthInput from "../AuthInput/AuthInput";
 import { useForm } from "../../hooks/useForm";
 import UserContext from "../../contexts/UserContext";
-import { PATH } from "../../utils/constants";
+import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, PATH } from "../../utils/constants";
 
 const DEFAULT_FORM_VALUES = {
   email: '',
@@ -40,6 +40,8 @@ const Login = () => {
       />
       <AuthInput
         label="Пароль"
+        min={MIN_PASSWORD_LENGTH}
+        max={MAX_PASSWORD_LENGTH}
         required
         id="password-login"
         name="password"

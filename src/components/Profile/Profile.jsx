@@ -3,6 +3,7 @@ import ProfileInput from "../ProfileInput/ProfileInput";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import { useForm } from "../../hooks/useForm";
 import "./Profile.css"
+import { MAX_NAME_LENGTH, MIN_NAME_LENGTH } from "../../utils/constants";
 
 const DEFAULT_FORM_VALUES = {
   name: 'Пользователь',
@@ -30,6 +31,8 @@ const Profile = ({ onLogOut }) => {
           type="text"
           placeholder="Введите имя"
           value={values.name}
+          min={MIN_NAME_LENGTH}
+          max={MAX_NAME_LENGTH}
           onChange={handleChange}
           hasSeparator
           disabled={!isEditMode}
@@ -70,7 +73,6 @@ const Profile = ({ onLogOut }) => {
               </button>
             </>
           )}
-
         </div>
       </form>
     </main>
