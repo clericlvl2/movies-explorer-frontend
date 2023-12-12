@@ -1,0 +1,46 @@
+.header {
+  z-index: 1;
+  width: calc(100% - 70px * 2);
+  max-width: 1140px;
+  min-width: 288px;
+  min-height: 74px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  margin-right: 45px;
+}
+
+.header__link {
+  transition: opacity .2s;
+  text-decoration: none;
+  color: #FFF;
+  cursor: pointer;
+}
+
+.header__link:hover {
+  opacity: .6;
+}
+
+.header__burger-menu {
+  border: none;
+  outline: none;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  background: url("./../../images/icons/burger.svg") center no-repeat;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    width: calc(100% - 30px * 2);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    width: calc(100% - 14px * 2);
+  }
+}

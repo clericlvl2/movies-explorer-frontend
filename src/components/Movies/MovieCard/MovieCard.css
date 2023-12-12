@@ -1,0 +1,115 @@
+.movie-card {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #222;
+}
+
+.movie-card__info {
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid: 30px 1fr / 1fr 30px;
+  row-gap: 10px;
+  margin: 0 auto;
+  padding: 9px 16px 16px 16px;
+  align-items: center;
+}
+
+.movie-card__title {
+  max-width: 200px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.movie-card__subtitle {
+  font-size: 11px;
+  line-height: 13px;
+  color: #8B8B8B;
+}
+
+.movie-card__button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  align-self: start;
+  border: none;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+.movie-card__button:hover {
+  opacity: 0.5;
+}
+
+.movie-card__fav-button {
+  background: url('../../../images/icons/fav-gray.svg') center no-repeat;
+  background-size: 14px 12px;
+}
+
+.movie-card__fav-button_active {
+  background: url('../../../images/icons/fav-red.svg') center no-repeat;
+}
+
+.movie-card__close-button {
+  background: url('../../../images/icons/exit.svg') center no-repeat;
+  background-size: 10px 10px;
+  opacity: 0;
+}
+
+.movie-card:hover .movie-card__close-button {
+  opacity: 1;
+}
+
+.movie-card__image {
+  width: 100%;
+  min-height: 203px;
+  max-height: 203px;
+  object-fit: contain;
+  object-position: center;
+  color: #FFF;
+  cursor: pointer;
+  transition: filter .2s;
+}
+
+.movie-card__image:hover {
+  filter: brightness(80%);
+}
+
+@media screen and (max-width: 768px) {
+  .movie-card__image {
+    min-height: 190px;
+    max-height: 190px;
+  }
+
+  .movie-card__info {
+    padding: 8px 14px 14px 14px;
+    row-gap: 7px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movie-card__image {
+    min-height: 168px;
+    max-height: 168px;
+  }
+}
+
+
+
+

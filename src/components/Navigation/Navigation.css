@@ -1,0 +1,152 @@
+.navigation {
+  flex-grow: 1;
+}
+
+.navigation__pages-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+}
+
+.navigation__auth-nav {
+  margin-left: auto;
+  width: fit-content;
+}
+
+.navigation__nav-list {
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+.navigation__nav-list_type_pages {
+  gap: 16px;
+}
+
+.navigation__nav-list_type_auth {
+  gap: 30px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.navigation__nav-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation__link {
+  transition: opacity .2s;
+  text-decoration: none;
+  color: #FFF;
+  cursor: pointer;
+}
+
+.navigation__link:hover {
+  opacity: .6;
+}
+
+.navigation__page-link {
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.navigation__page-link_active {
+  font-weight: 500;
+}
+
+.navigation__account-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 12px;
+  background: none;
+  color: #FFF;
+  border: none;
+}
+
+.navigation__account-logo {
+  background: url("./../../images/icons/account.svg") rgba(255, 255, 255, .1) center no-repeat;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.navigation__link-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  width: 76px;
+  height: 32px;
+  background: #3DDC84;
+  border: none;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__pages-nav {
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .navigation__nav-list_type_pages {
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .navigation__nav-list_type_auth {
+    flex-direction: row;
+  }
+
+  .navigation__page-link {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+
+  .navigation__page-link_active {
+    position: relative;
+    font-weight: 400;
+  }
+
+  .navigation__page-link_active::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background-color: #FFF;
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navigation__page-link_active::before {
+    bottom: -8px;
+  }
+
+  .navigation__nav-list_type_pages {
+    gap: 24px;
+  }
+
+  .navigation__nav-list_type_auth {
+    gap: 14px;
+  }
+
+  .navigation__page-link {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
