@@ -2,8 +2,8 @@ import { useFetchMovies } from "./useFetchMovies";
 import { useLocalStorageState } from "../useLocalStorage";
 import { LOCAL_STORAGE_KEY } from "../../utils/constants";
 import { splitArray } from "../../utils/helpers";
-import { useState } from "react";
-import { getFilteredMovies } from "./helpers";
+import { useMemo, useState } from "react";
+import { getFilteredMovies, isDefaultMovieFilter } from "./helpers";
 import { DEFAULT_MOVIES_FILTER } from "./constants";
 
 export const useMovies = (paginationConfig) => {
@@ -19,6 +19,8 @@ export const useMovies = (paginationConfig) => {
   const [filteredMovies, setFilteredMovies] = useState(false);
   const [moviesFilter, setMoviesFilter] = useLocalStorageState(LOCAL_STORAGE_KEY.MOVIES_FILTER, DEFAULT_MOVIES_FILTER);
   const [foundMovies, setFoundMovies] = useLocalStorageState(LOCAL_STORAGE_KEY.FOUND_MOVIES, null);
+
+  const isSearching = useMemo(() => !isDefaultMovieFilter(moviesFilter), [moviesFilter]);
 
   const { pageSize, chunkSize } = paginationConfig;
 
@@ -68,5 +70,5 @@ export const useMovies = (paginationConfig) => {
     setFoundMovies(state => ([...state, ...moviesToAdd]));
   }
 
-  return { foundMovies, moviesFilter, hasMore, isLoading, error, onSearchMovie, onAddMoreMovies }
+  return { foundMovies, moviesFilter, hasMore, isSearching, isLoading, error, onSearchMovie, onAddMoreMovies };
 }

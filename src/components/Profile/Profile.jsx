@@ -1,46 +1,34 @@
 import { useContext, useEffect, useState } from "react";
 import ProfileInput from "../ProfileInput/ProfileInput";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import "./Profile.css"
 import {
+  EMAIL_FIELD_PATTERN,
   MAX_NAME_LENGTH,
   MIN_NAME_LENGTH,
   NAME_FIELD_PATTERN,
-  SUCCESSFUL_USER_UPDATE_MESSAGE
+  NOTIFICATION_MESSAGE,
+  NOTIFICATION_TYPE, VALIDATION_PATTERN_OPTIONS,
 } from "../../utils/validation";
 import mainApi from "../../utils/api/MainApi";
 import { useFormWithValidation } from "../../hooks/useFormWIthValidation";
 import { handleError, isEmptyObject } from "../../utils/helpers";
 import UserContext from "../../contexts/UserContext";
-
-const getErrorMessageByStatus = (status) => {
-  switch (String(status)) {
-    case '409': {
-      return 'Пользователь с таким email уже существует.';
-    }
-    default: {
-      return 'При обновлении профиля произошла ошибка.';
-    }
-  }
-}
-
-const NOTIFICATION_TYPE = {
-  SUCCESS: 'success',
-  ERROR: 'error',
-};
+import { getErrorMessageByStatus } from "./helpers";
+import "./Profile.css"
 
 const Profile = ({ onUpdateUser, onLogOut }) => {
   const { user } = useContext(UserContext);
-  const { form, handleChange, errors } = useFormWithValidation({
-    name: user.name,
-    email: user.email
-  });
+  const { form, handleChange, errors } = useFormWithValidation(
+    { name: user.name, email: user.email },
+    VALIDATION_PATTERN_OPTIONS
+  );
   const [isEditMode, setIsEditMode] = useState(false);
   const [serverError, setServerError] = useState(null);
   const [notification, setNotification] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const hasFormValues = form.name && form.email;
+  const hasFormChanged = form.name !== user.name || form.email !== user.email;
   const hasErrors = !isEmptyObject(errors);
 
   useEffect(() => {
@@ -86,7 +74,7 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
       if (data) {
         onUpdateUser(data);
         toggleEditMode();
-        createNotification(NOTIFICATION_TYPE.SUCCESS, SUCCESSFUL_USER_UPDATE_MESSAGE);
+        createNotification(NOTIFICATION_TYPE.SUCCESS, NOTIFICATION_MESSAGE.USER_UPDATE);
       }
     } catch (err) {
       handleError(err);
@@ -132,7 +120,7 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
   return (
     <main className="profile">
       <form className="profile__form" onSubmit={onSubmit}>
-        <h1 className="profile__title">Привет, Артем!</h1>
+        <h1 className="profile__title">{`Привет, ${user.name}!`}</h1>
         <ProfileInput
           label="Имя"
           id="name-profile"
@@ -153,6 +141,7 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
           id="email-profile"
           name="email"
           type="email"
+          pattern={EMAIL_FIELD_PATTERN}
           placeholder="Введите e-mail"
           value={form.email}
           errorMessage={errors.email}
@@ -172,7 +161,7 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
                 label="Сохранить"
                 className="profile__button_type_submit"
                 isLoading={isLoading}
-                isDisabled={hasErrors || !hasFormValues}
+                isDisabled={hasErrors || !hasFormValues || !hasFormChanged}
               />
             </div>
           ) : (

@@ -1,25 +1,14 @@
-import { cn, getMovieImageURL } from "../../../utils/helpers";
+import { classnames, getMovieImageURL } from "../../../utils/helpers";
+import { getMovieDuration } from "./helpers";
 import "./MovieCard.css"
 
-const MINUTES_IN_HOUR = 60;
-
-const getMovieDuration = (duration) => {
-  const hours = Math.floor(duration/MINUTES_IN_HOUR);
-  const minutes = duration - MINUTES_IN_HOUR * hours;
-
-  const hoursToRender = hours ? `${hours}ч` : null;
-  const minutesToRender = minutes ? `${minutes}мин` : null;
-
-  return [hoursToRender, minutesToRender].filter(Boolean).join(' ');
-}
-
 const MovieCard = ({ movie, isSaved, isSavedMovies, onDeleteMovie, onSaveMovie }) => {
-  const favButtonClassName = cn(
+  const favButtonClassName = classnames(
     'movie-card__fav-button',
     isSaved && ' movie-card__fav-button_active'
   );
 
-  const buttonClassName = cn(
+  const buttonClassName = classnames(
     'movie-card__button',
     isSavedMovies ? 'movie-card__close-button' : favButtonClassName
   );

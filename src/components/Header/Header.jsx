@@ -11,7 +11,7 @@ const Header = ({ onNavMenuOpen }) => {
 
   return (
     <header className="header">
-        <Logo className="header__logo" />
+      <Logo className="header__logo" />
       {!isDesktop && isLogged ? (
         <button
           type="button"
@@ -21,7 +21,6 @@ const Header = ({ onNavMenuOpen }) => {
       ) : (
         <Navigation isLogged={isLogged} showMainLink={false} />
       )}
-
     </header>
   );
 };

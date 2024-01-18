@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import { cn } from "../../utils/helpers";
+import { classnames } from "../../utils/helpers";
 import "./AuthLayout.css"
 
 const AuthLayout = ({
@@ -27,7 +27,7 @@ const AuthLayout = ({
           {serverError && <span className="auth-layout__error">{serverError}</span>}
           <SubmitButton
             {...submitButtonOptions}
-            className={cn('auth-layout__submit-button', serverError && 'auth-layout__submit-button_type_error')}
+            className={classnames('auth-layout__submit-button', serverError && 'auth-layout__submit-button_type_error')}
           />
         </div>
       </form>

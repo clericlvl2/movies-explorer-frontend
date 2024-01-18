@@ -3,37 +3,28 @@ import AuthLayout from "../AuthLayout/AuthLayout";
 import AuthInput from "../AuthInput/AuthInput";
 import { PATH } from "../../utils/constants";
 import {
+  EMAIL_FIELD_PATTERN,
   MAX_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
   MIN_NAME_LENGTH,
   MIN_PASSWORD_LENGTH,
-  NAME_FIELD_PATTERN
+  NAME_FIELD_PATTERN,
+  VALIDATION_PATTERN_OPTIONS
 } from "../../utils/validation";
 import { useFormWithValidation } from "../../hooks/useFormWIthValidation";
 import mainApi from "../../utils/api/MainApi";
 import { handleError, isEmptyObject } from "../../utils/helpers";
-
-const DEFAULT_FORM_VALUES = {
-  name: '',
-  email: '',
-  password: ''
-};
-
-const getErrorMessageByStatus = (status) => {
-  switch (String(status)) {
-    case '409': {
-      return 'Пользователь с таким email уже существует.';
-    }
-    default: {
-      return 'При регистрации пользователя произошла ошибка.';
-    }
-  }
-}
+import { DEFAULT_FORM_VALUES } from "./constants";
+import { getErrorMessageByStatus } from "./helpers";
 
 const Register = ({ onRegister }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState(null);
-  const { form, handleChange, errors, isValid } = useFormWithValidation(DEFAULT_FORM_VALUES);
+
+  const { form, handleChange, errors, isValid } = useFormWithValidation(
+    DEFAULT_FORM_VALUES,
+    VALIDATION_PATTERN_OPTIONS
+  );
 
   const isEmptyForm = isEmptyObject(form);
 
@@ -47,9 +38,13 @@ const Register = ({ onRegister }) => {
     try {
       setIsLoading(true);
       const { data } = await mainApi.register(formData);
+      const { message } = await mainApi.logIn({
+        email: formData.email,
+        password: formData.password
+      });
 
-      if (data) {
-        onRegister();
+      if (data && message) {
+        onRegister(data);
       }
     } catch (err) {
       handleError(err);
@@ -96,6 +91,7 @@ const Register = ({ onRegister }) => {
         id="email-register"
         name="email"
         type="email"
+        pattern={EMAIL_FIELD_PATTERN}
         placeholder="Email"
         value={form.email}
         errorMessage={errors.email}

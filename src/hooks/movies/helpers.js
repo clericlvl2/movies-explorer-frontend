@@ -1,4 +1,5 @@
-import { MAX_SHORT_MOVIE_DURATION } from "./constants";
+import { DEFAULT_MOVIES_FILTER, MAX_SHORT_MOVIE_DURATION } from "./constants";
+import { getMovieImageURL } from "../../utils/helpers";
 
 const hasStringMatch = (value, searchValue) => {
   const processedValue = value.toLowerCase();
@@ -6,6 +7,7 @@ const hasStringMatch = (value, searchValue) => {
 
   return processedValue.includes(processedTest);
 }
+
 export const getFilteredMovies = (moviesList, { title, isShort }) => moviesList.filter(movie => {
   const { nameRU, nameEN, duration } = movie;
 
@@ -14,3 +16,16 @@ export const getFilteredMovies = (moviesList, { title, isShort }) => moviesList.
 
   return isTitleMatched && isTypeMatched
 })
+
+export const getMappedMovieData = ({ id, created_at, updated_at, ...movie }) => ({
+  ...movie,
+  movieId: id,
+  image: getMovieImageURL(movie.image.url),
+  thumbnail: getMovieImageURL(movie.image.formats.thumbnail.url)
+});
+
+export const isDefaultMovieFilter = (moviesFilter) => {
+  const { title, isShort } = DEFAULT_MOVIES_FILTER
+
+  return title === moviesFilter.title && isShort === moviesFilter.isShort;
+}

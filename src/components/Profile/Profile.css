@@ -1,6 +1,7 @@
 .profile {
   width: calc(100% - 70px * 2);
   min-height: calc(100vh - 74px);
+  height: 1px;
   margin: 0 auto;
   padding: 0 0 70px 0;
   display: flex;

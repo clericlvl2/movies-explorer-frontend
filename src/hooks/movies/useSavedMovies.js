@@ -1,30 +1,26 @@
 import mainApi from "../../utils/api/MainApi";
-import { deleteElementById, getMovieImageURL, handleError } from "../../utils/helpers";
-import { useEffect, useMemo, useState } from "react";
-import { getFilteredMovies } from "./helpers";
+import { deleteElementById, handleError } from "../../utils/helpers";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { getFilteredMovies, getMappedMovieData, isDefaultMovieFilter } from "./helpers";
 import { DEFAULT_MOVIES_FILTER } from "./constants";
-
-const getMappedMovieData = ({ id, created_at, updated_at, ...movie }) => ({
-  ...movie,
-  movieId: id,
-  image: getMovieImageURL(movie.image.url),
-  thumbnail: getMovieImageURL(movie.image.formats.thumbnail.url)
-});
 
 export const useSavedMovies = (shouldFetch) => {
   const [savedMovies, setSavedMovies] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [savedMoviesFilter, setSavedMoviesFilter] = useState(DEFAULT_MOVIES_FILTER);
+
+  const isFetchedOnce = useRef(false);
 
   const savedMoviesToView = useMemo(
     () => savedMovies ? getFilteredMovies(savedMovies, savedMoviesFilter) : null,
     [savedMovies, savedMoviesFilter]
   );
 
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const isSearching = useMemo(() => !isDefaultMovieFilter(savedMoviesFilter), [savedMoviesFilter]);
 
   useEffect(() => {
-    if (shouldFetch) {
+    if (shouldFetch && !isFetchedOnce.current) {
       fetchSavedMovies();
     }
   }, [shouldFetch]);
@@ -35,6 +31,7 @@ export const useSavedMovies = (shouldFetch) => {
       const { data } = await mainApi.getFavouriteMovies();
 
       if (data) {
+        isFetchedOnce.current = true;
         setSavedMovies(data);
         setSavedMoviesFilter(DEFAULT_MOVIES_FILTER)
       }
@@ -45,7 +42,7 @@ export const useSavedMovies = (shouldFetch) => {
     }
   }
 
-  const onSearchSavedMovie = async (filterValues) => {
+  const onSearchSavedMovie = (filterValues) => {
     const filter = { ...savedMoviesFilter, ...filterValues };
 
     setSavedMoviesFilter(filter)
@@ -98,6 +95,7 @@ export const useSavedMovies = (shouldFetch) => {
     savedMovies: savedMoviesToView,
     savedMoviesRaw: savedMovies,
     savedMoviesFilter,
+    isSearchingSaved: isSearching,
     isSavedMoviesLoading: isLoading,
     savedMoviesError: error,
     onSearchSavedMovie,

@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react'
-import { PATTERN_ERROR_MESSAGE } from "../utils/validation";
+import { isDefined } from "../utils/helpers";
 
 const DEFAULT_ERRORS = {};
 
-export function useFormWithValidation(initialFormData) {
+export function useFormWithValidation(initialFormData, options) {
   const [form, setForm] = useState(initialFormData);
   const [errors, setErrors] = useState(DEFAULT_ERRORS);
   const [isValid, setIsValid] = useState(false);
@@ -12,12 +12,18 @@ export function useFormWithValidation(initialFormData) {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    const error = target.validity.patternMismatch
-      ? PATTERN_ERROR_MESSAGE
-      : target.validationMessage
+
+    let errorMessage = target.validationMessage;
+
+    const isPatternMismatch = target.validity.patternMismatch;
+    const hasCustomMessage = isDefined(options[name])
+
+    if (isPatternMismatch && hasCustomMessage) {
+      errorMessage = options[name]
+    }
 
     setForm({...form, [name]: value});
-    setErrors({...errors, [name]: error });
+    setErrors({...errors, [name]: errorMessage });
     setIsValid(target.closest("form").checkValidity());
   };
 

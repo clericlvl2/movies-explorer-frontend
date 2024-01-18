@@ -11,7 +11,7 @@ const MAIN_API_ENDPOINTS = {
   movies: '/movies',
 };
 
-class FavouriteMoviesApi extends BaseApi {
+class SavedMoviesApi extends BaseApi {
   constructor(options) {
     super(options);
 
@@ -95,7 +95,7 @@ class FavouriteMoviesApi extends BaseApi {
   }
 }
 
-const mainApi = new FavouriteMoviesApi({
+const mainApi = new SavedMoviesApi({
   baseURL: MAIN_API_BASE_URL,
   endpoints: MAIN_API_ENDPOINTS,
   headers: { 'Content-Type': 'application/json' }

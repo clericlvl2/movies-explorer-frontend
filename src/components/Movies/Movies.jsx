@@ -12,6 +12,7 @@ const Movies = ({ isSavedMovies = false }) => {
     foundMovies,
     moviesFilter,
     hasMore,
+    isSearching,
     isLoading,
     error,
     onSearchMovie,
@@ -23,11 +24,13 @@ const Movies = ({ isSavedMovies = false }) => {
     savedMoviesRaw,
     savedMoviesFilter,
     savedMoviesError,
+    isSearchingSaved,
     isSavedMoviesLoading,
     onSearchSavedMovie,
     saveMovie,
     deleteMovie
   } = useSavedMovies(isSavedMovies);
+
 
   if (!isSavedMovies) {
     return (
@@ -39,8 +42,9 @@ const Movies = ({ isSavedMovies = false }) => {
         />
         {isLoading && <Spinner />}
         {error && <span className="movies__error">{error}</span>}
-        {foundMovies && !error && (
+        {!error && (
           <MoviesGallery
+            isSearching={isSearching}
             movies={foundMovies}
             savedMoviesInfo={savedMoviesRaw}
             onMoreButtonClick={onAddMoreMovies}
@@ -62,9 +66,10 @@ const Movies = ({ isSavedMovies = false }) => {
       />
       {isSavedMoviesLoading && <Spinner />}
       {savedMoviesError && <span className="movies__error">{savedMoviesError}</span>}
-      {savedMovies && !savedMoviesError && (
+      {!savedMoviesError && (
         <MoviesGallery
           isSavedMovies
+          isSearching={isSearchingSaved}
           movies={savedMovies}
           onDeleteMovie={deleteMovie}
         />

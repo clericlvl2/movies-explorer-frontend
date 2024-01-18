@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
-import { cn } from "../../utils/helpers";
+import { classnames } from "../../utils/helpers";
 import "./AuthInput.css"
-
 
 const AuthInput = forwardRef(({ label, id, className, errorMessage, ...props }, ref) => {
   return (
@@ -11,12 +10,11 @@ const AuthInput = forwardRef(({ label, id, className, errorMessage, ...props }, 
         {...props}
         ref={ref}
         id={id}
-        className={cn('auth-input__input', errorMessage && 'auth-input__input_type_error', className)}
+        className={classnames('auth-input__input', errorMessage && 'auth-input__input_type_error', className)}
       />
       <span className="auth-input__input-error">{errorMessage}</span>
     </div>
   )
 })
-
 
 export default AuthInput

@@ -1,17 +1,20 @@
 import MovieCard from "../MovieCard/MovieCard";
 import SectionLayout from "../../Main/SectionLayout/SectionLayout";
 import "./MoviesGallery.css"
+import { NOTIFICATION_MESSAGE } from "../../../utils/validation";
 
 const MoviesGallery = ({
   movies,
   savedMoviesInfo,
   isSavedMovies,
+  isSearching,
   hasMore = false,
   onMoreButtonClick,
   onSaveMovie,
   onDeleteMovie
 }) => {
-  const hasMovies = movies && movies.length;
+  const hasMovies = Boolean(movies && movies.length);
+  const isMoreButtonVisible = hasMovies && hasMore && onMoreButtonClick && !isSavedMovies;
 
   return (
     <SectionLayout
@@ -19,7 +22,11 @@ const MoviesGallery = ({
       contentClassName="movies-gallery__content"
       isWideSection
     >
-      {hasMovies ? (
+      {!hasMovies && isSearching && (
+        <span className="movies-gallery__notification">{NOTIFICATION_MESSAGE.MOVIES_NOT_FOUND}</span>
+      )}
+
+      {hasMovies && (
         <ul className="movies-gallery__list">
           {movies.map(movie => {
             const id = movie.id || movie.movieId;
@@ -38,10 +45,8 @@ const MoviesGallery = ({
             )}
           )}
         </ul>
-      ) : (
-        <span className="movies-gallery__notification">По результатам запроса фильмов не найдено.</span>
       )}
-      {!isSavedMovies && hasMore && onMoreButtonClick && (
+      {isMoreButtonVisible && (
         <button
           type="button"
           onClick={onMoreButtonClick}

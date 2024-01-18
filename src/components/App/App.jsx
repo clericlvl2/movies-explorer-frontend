@@ -11,10 +11,11 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import UserContext from "../../contexts/UserContext";
 import { useModal } from "../../hooks/useModal";
 import { usePageLayout } from "../../hooks/usePageLayout";
-import { getPath, handleError } from "../../utils/helpers";
+import { getRoutePath, handleError } from "../../utils/helpers";
 import { LOCAL_STORAGE_KEY, PATH, ROUTE } from "../../utils/constants";
 import { useLocalStorageState } from "../../hooks/useLocalStorage";
 import mainApi from "../../utils/api/MainApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const App = () => {
   const navigate = useNavigate();
@@ -24,12 +25,10 @@ const App = () => {
   const isLogged = Boolean(user);
 
   useEffect(() => {
-    isUserLogged().then(isLogged => {
-      console.log(isLogged);
-    })
+    checkUserAuthorization();
   }, []);
 
-  const isUserLogged = async () => {
+  const checkUserAuthorization = async () => {
     if (!user) {
       return false;
     }
@@ -42,30 +41,24 @@ const App = () => {
         setUser(data);
       }
 
-      return isUserLogged
     } catch (err) {
       handleError(err);
-      return false
     }
   };
 
   const onLogin = (data) => {
     setUser(data);
-    navigate(getPath(ROUTE.MAIN), { replace: true });
+    navigate(getRoutePath(ROUTE.MOVIES), { replace: true });
   }
 
   const onUpdateUser = (data) => {
     setUser(data);
   }
 
-  const onRegister = () => {
-    navigate(ROUTE.SIGN_IN, { replace: true });
-  }
-
   const onLogOut = () => {
     localStorage.clear();
     setUser(null);
-    navigate(getPath(ROUTE.MAIN), { replace: true });
+    navigate(getRoutePath(ROUTE.MAIN), { replace: true });
   }
 
   const layoutProps = useMemo(() => ({
@@ -116,13 +109,17 @@ const App = () => {
         <Route
           path={ROUTE.SIGN_IN}
           element={
-            <Login onLogin={onLogin} />
+            <ProtectedRoute hasPermission={!isLogged}>
+              <Login onLogin={onLogin} />
+            </ProtectedRoute>
           }
         />
         <Route
           path={ROUTE.SIGN_UP}
           element={
-            <Register onRegister={onRegister} />
+            <ProtectedRoute hasPermission={!isLogged}>
+              <Register onRegister={onLogin} />
+            </ProtectedRoute>
           }
         />
         <Route path={ROUTE.NOT_FOUND} element={<NotFoundPage />} />

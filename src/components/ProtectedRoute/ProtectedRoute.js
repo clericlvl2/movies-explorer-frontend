@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom';
 import { PATH } from "../../utils/constants";
 
-const ProtectedRoute = ({ isLogged, children }) => {
-  if (!isLogged) {
+const ProtectedRoute = ({ hasPermission, children }) => {
+  if (!hasPermission) {
     return <Navigate to={PATH.MAIN} replace />;
   }
 

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { PATH } from "../../utils/constants";
-import { cn } from "../../utils/helpers";
+import { classnames } from "../../utils/helpers";
 import "./Navigation.css"
 
 const Navigation = ({ isLogged, onLinkClick, showMainLink = true }) => {
@@ -14,7 +14,7 @@ const Navigation = ({ isLogged, onLinkClick, showMainLink = true }) => {
             {showMainLink && (
               <li>
                 <Link
-                  className={cn(
+                  className={classnames(
                     'navigation__link',
                     'navigation__page-link',
                     pathname === PATH.MAIN && 'navigation__page-link_active'
@@ -28,7 +28,7 @@ const Navigation = ({ isLogged, onLinkClick, showMainLink = true }) => {
             )}
             <li>
               <Link
-                className={cn(
+                className={classnames(
                   'navigation__link',
                   'navigation__page-link',
                   pathname === PATH.MOVIES && 'navigation__page-link_active'
@@ -41,7 +41,7 @@ const Navigation = ({ isLogged, onLinkClick, showMainLink = true }) => {
             </li>
             <li>
               <Link
-                className={cn(
+                className={classnames(
                   'navigation__link',
                   'navigation__page-link',
                   pathname === PATH.SAVED_MOVIES && 'navigation__page-link_active'
