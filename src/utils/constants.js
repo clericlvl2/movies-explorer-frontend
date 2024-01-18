@@ -1,11 +1,5 @@
 import { getPath } from "./helpers";
 
-export const MIN_NAME_LENGTH = 2;
-export const MAX_NAME_LENGTH = 30;
-
-export const MIN_PASSWORD_LENGTH = 2;
-export const MAX_PASSWORD_LENGTH = 30;
-
 export const ROUTE = {
   MAIN: '',
   MOVIES: 'movies',
@@ -24,6 +18,12 @@ export const PATH = {
   SIGN_IN: getPath(ROUTE.SIGN_IN),
   SIGN_UP: getPath(ROUTE.SIGN_UP),
   NOT_FOUND: getPath(ROUTE.NOT_FOUND),
+}
+
+export const LOCAL_STORAGE_KEY = {
+  MOVIES_FILTER: 'moviesFilter',
+  FOUND_MOVIES: 'foundMovies',
+  USER: 'user',
 }
 
 export const CURRENT_YEAR = new Date().getFullYear();
