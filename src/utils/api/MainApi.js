@@ -1,6 +1,6 @@
 import BaseApi from "./BaseApi";
 
-const MAIN_API_BASE_URL = 'api.clericlvl2.movies.nomoredomainsmonster.ru';
+const MAIN_API_BASE_URL = 'https://api.clericlvl2.movies.nomoredomainsmonster.ru';
 // const MAIN_API_BASE_URL = 'http://localhost:3001';
 
 const MAIN_API_ENDPOINTS = {

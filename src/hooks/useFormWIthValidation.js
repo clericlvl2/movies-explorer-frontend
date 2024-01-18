@@ -12,7 +12,7 @@ export function useFormWithValidation(initialFormData) {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    const error = target.ValidityState.patternMismatch
+    const error = target.validity.patternMismatch
       ? PATTERN_ERROR_MESSAGE
       : target.validationMessage
 
