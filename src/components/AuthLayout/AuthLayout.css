@@ -1,7 +1,7 @@
 .auth-layout {
   width: calc(100% - 70px * 2);
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 70px;
   display: flex;
   flex-direction: column;
@@ -62,6 +62,27 @@
   opacity: .6;
 }
 
+.auth-layout__submit-button-container {
+  min-height: 115px;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.auth-layout__error {
+  text-align: center;
+  color: #EE3465;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: 0;
+}
+
+.auth-layout__submit-button {
+  margin-top: 0;
+}
+
 @media screen and (max-width: 768px) {
   .auth-layout {
     width: calc(100% - 30px * 2);
@@ -93,7 +114,7 @@
     flex-grow: 1;
   }
 
-  .auth-layout__submit-button {
+  .auth-layout__submit-button-container {
     margin-top: auto;
   }
 }

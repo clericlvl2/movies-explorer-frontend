@@ -1,13 +1,13 @@
 import "./FilterCheckbox.css"
 
-const FilterCheckbox = ({ label, ...props }) => {
+const FilterCheckbox = ({ label, id, ...props }) => {
   return (
     <div className="filter-checkbox">
-      <label className="filter-checkbox__checkbox" htmlFor="short-movie-checkbox">
+      <label className="filter-checkbox__checkbox" htmlFor={id}>
         <input
           {...props}
           className="filter-checkbox__input"
-          id="short-movie-checkbox"
+          id={id}
           type="checkbox"
         />
         <span className="filter-checkbox__switcher" />

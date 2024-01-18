@@ -10,18 +10,17 @@
   line-height: 17px;
   color: #FFF;
   text-align: center;
-  transition: opacity .24s;
+  transition: opacity .2s, background-color .2s;
   cursor: pointer;
 }
 
 .submit-button:hover {
-  opacity: .85;
+  opacity: .8;
 }
 
-.submit-button_disabled {
-  opacity: 0.85;
-}
-
-.submit-button_disabled:hover {
-  opacity: 0.85;
+.submit-button:disabled {
+  opacity: .8;
+  cursor: default;
+  color: #C2C2C2;
+  background-color: #F8F8F8;
 }

@@ -1,13 +1,14 @@
 import Spinner from "../Spinner/Spinner";
+import { cn } from "../../utils/helpers";
 import "./SubmitButton.css"
 
-const SubmitButton = ({ isLoading = false, className = '', label = 'Нажми меня' }) => (
+const SubmitButton = ({ className, label, isLoading, isDisabled }) => (
   <button
     type="submit"
-    className={`submit-button ${isLoading ? 'submit-button_disabled' : ''} ${className}`}
-    disabled={isLoading}
+    className={cn('submit-button', className)}
+    disabled={isLoading || isDisabled}
   >
-    {isLoading ? <Spinner/> : label}
+    {isLoading ? <Spinner dark /> : label}
   </button>
 );
 

@@ -22,6 +22,15 @@
   padding: 0;
 }
 
+.movies-gallery__notification {
+  text-align: center;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0;
+}
+
 .movies-gallery__more-button {
   width: 100%;
   min-height: 36px;

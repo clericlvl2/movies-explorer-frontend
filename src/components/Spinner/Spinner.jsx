@@ -1,9 +1,10 @@
 import "./Spinner.css"
+import { cn } from "../../utils/helpers";
 
-const Spinner = () => {
+const Spinner = ({ dark = false }) => {
   return (
     <div className="spinner">
-      <div className="spinner__content">
+      <div className={cn('spinner__content', dark && 'spinner__content_dark')}>
         <i></i>
       </div>
     </div>
