@@ -1,30 +1,53 @@
-import { cn } from "../../../utils/helpers";
+import { classnames, getMovieImageURL } from "../../../utils/helpers";
+import { getMovieDuration } from "./helpers";
 import "./MovieCard.css"
 
-const MovieCard = ({ movie, isFavoriteView }) => {
-  const favButtonClassName = cn(
+const MovieCard = ({ movie, isSaved, isSavedMovies, onDeleteMovie, onSaveMovie }) => {
+  const favButtonClassName = classnames(
     'movie-card__fav-button',
-    movie.isFavorite && ' movie-card__fav-button_active'
+    isSaved && ' movie-card__fav-button_active'
   );
 
-  const buttonClassName = cn(
+  const buttonClassName = classnames(
     'movie-card__button',
-    isFavoriteView ? 'movie-card__close-button' : favButtonClassName
+    isSavedMovies ? 'movie-card__close-button' : favButtonClassName
   );
+
+  const handleMovieSave = (evt) => {
+    evt.preventDefault();
+    onSaveMovie?.(movie);
+  };
+
+  const handleMovieDelete = (evt) => {
+    evt.preventDefault();
+    onDeleteMovie?.(movie.id || movie.movieId);
+  };
+
+  const cardButtonClickHandler = (isSavedMovies || isSaved) ? handleMovieDelete : handleMovieSave;
+  const imageURL = typeof movie.image === 'string' ? movie.image : getMovieImageURL(movie.image.url)
 
   return (
-    <div className="movie-card">
+    <a
+      className="movie-card"
+      href={movie.trailerLink}
+      target="_blank"
+      rel="noreferrer"
+    >
       <img
-        src={movie.posterURL}
-        alt={movie.name}
+        src={imageURL}
+        alt={movie.nameRU}
         className="movie-card__image"
       />
       <div className="movie-card__info">
-        <h2 className="movie-card__title">{movie.name}</h2>
-        <span className="movie-card__subtitle">{movie.duration}</span>
-        <button type="button" className={buttonClassName}/>
+        <h2 className="movie-card__title">{movie.nameRU}</h2>
+        <span className="movie-card__subtitle">{getMovieDuration(movie.duration)}</span>
+        <button
+          type="button"
+          className={buttonClassName}
+          onClick={cardButtonClickHandler}
+        />
       </div>
-    </div>
+    </a>
   )
 }
 

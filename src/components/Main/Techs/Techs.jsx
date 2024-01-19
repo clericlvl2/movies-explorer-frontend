@@ -1,16 +1,7 @@
 import SectionTitle from "../SectionTitle/SectionTitle";
 import SectionLayout from "../SectionLayout/SectionLayout";
+import { TECH_STACK } from "./constants";
 import "./Techs.css"
-
-const TECH_STACK = [
-  'HTML',
-  'CSS',
-  'JS',
-  'React',
-  'Git',
-  'Express.js',
-  'mongoDB',
-];
 
 const Techs = () => {
   return (

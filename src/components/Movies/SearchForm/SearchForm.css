@@ -81,6 +81,11 @@
   opacity: .8;
 }
 
+.search-form__submit-button:disabled {
+  cursor: default;
+  opacity: .8;
+}
+
 @media screen and (max-width: 768px) {
   .search-form__content {
     padding: 80px 0 50px 0;

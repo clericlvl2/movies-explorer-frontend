@@ -1,18 +1,26 @@
-import { useForm } from "../../../hooks/useForm";
+import { useEffect, useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import SectionLayout from "../../Main/SectionLayout/SectionLayout";
 import "./SearchForm.css"
 
-const DEFAULT_FORM_VALUES = {
-  movie: '',
-  isShortMovie: false
-}
+const SearchForm = ({ moviesFilter, onSearchMovie, isLoading }) => {
+  const [searchValue, setSearchValue] = useState(moviesFilter.title);
 
-const SearchForm = () => {
-  const { values, handleChange } = useForm(DEFAULT_FORM_VALUES);
+  useEffect(() => {
+    setSearchValue(moviesFilter.title);
+  }, [moviesFilter.title]);
 
-  const onSubmit = (evt) => {
+  const onSearchValueChange = evt => {
+    setSearchValue(evt.target.value);
+  }
+
+  const onSearchMovieByTitle = (evt) => {
     evt.preventDefault();
+    onSearchMovie({ title: searchValue });
+  }
+
+  const onMovieTypeChange = (evt) => {
+    onSearchMovie({ isShort: evt.target.checked })
   }
 
   return (
@@ -21,28 +29,29 @@ const SearchForm = () => {
       contentClassName="search-form__content"
       isWideSection
     >
-      <form className="search-form__form" onSubmit={onSubmit}>
+      <form className="search-form__form" onSubmit={onSearchMovieByTitle}>
         <div className="search-form__input-container">
-          <label htmlFor="movie-input"/>
+          <label htmlFor="movie-title"/>
           <input
-            required
             className="search-form__input"
-            id="movie-input"
-            name="movie"
+            id="movie-title"
+            name="title"
             placeholder="Фильм"
             type="text"
-            value={values.movie}
-            onChange={handleChange}
+            value={searchValue}
+            onChange={onSearchValueChange}
           />
 
-          <button className="search-form__submit-button" type="submit" />
+          <button disabled={isLoading} className="search-form__submit-button" type="submit" />
         </div>
 
         <FilterCheckbox
           label="Короткометражки"
-          name="isShortMovie"
-          value={values.isShortMovie}
-          onChange={handleChange}
+          id="movie-type"
+          name="isShort"
+          disabled={isLoading}
+          checked={moviesFilter.isShort}
+          onChange={onMovieTypeChange}
         />
       </form>
     </SectionLayout>

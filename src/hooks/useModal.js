@@ -7,18 +7,18 @@ export const useModal = () => {
   const close = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
-    const closeByEscape = (evt) => {
+    const closeOnPressEscape = (evt) => {
       if (evt.key === 'Escape') {
         close();
-        console.log('esc')
       }
     }
 
     if (isOpen) {
-      document.addEventListener('keydown', closeByEscape);
+      document.addEventListener('keydown', closeOnPressEscape);
+
       return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      }
+        document.removeEventListener('keydown', closeOnPressEscape);
+      };
     }
   }, [isOpen]);
 

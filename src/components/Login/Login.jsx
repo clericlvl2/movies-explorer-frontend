@@ -1,23 +1,55 @@
-import { useContext } from "react";
+import { useState } from "react";
 import AuthLayout from "../AuthLayout/AuthLayout";
 import AuthInput from "../AuthInput/AuthInput";
-import { useForm } from "../../hooks/useForm";
-import UserContext from "../../contexts/UserContext";
-import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, PATH } from "../../utils/constants";
+import { PATH } from "../../utils/constants";
+import {
+  EMAIL_FIELD_PATTERN,
+  MAX_PASSWORD_LENGTH,
+  MIN_PASSWORD_LENGTH,
+  PATTERN_ERROR,
+} from "../../utils/validation";
+import { useFormWithValidation } from "../../hooks/useFormWIthValidation";
+import mainApi from "../../utils/api/MainApi";
+import { handleError } from "../../utils/helpers";
+import { getErrorMessageByStatus } from "./helpers";
+import { DEFAULT_FORM_VALUES } from "./constants";
 
-const DEFAULT_FORM_VALUES = {
-  email: '',
-  password: ''
-}
+const Login = ({ onLogin }) => {
+  const { form, handleChange, errors, isValid } = useFormWithValidation(DEFAULT_FORM_VALUES, {
+    email: PATTERN_ERROR.EMAIL
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState(null);
 
-const Login = () => {
-  const { values, handleChange } = useForm(DEFAULT_FORM_VALUES);
-  const { logIn } = useContext(UserContext)
+  const submitButtonOptions = {
+    isLoading,
+    isDisabled: !isValid,
+    label: "Войти"
+  };
+
+  const logInClickHandler = async (formData) => {
+    try {
+      setIsLoading(true);
+
+      const { message } = await mainApi.logIn(formData);
+      const { data } = await mainApi.getUser();
+
+      if (data && message) {
+        onLogin(data);
+      }
+    } catch (err) {
+      handleError(err);
+      setServerError(getErrorMessageByStatus(err.status));
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    logIn();
-  }
+    setServerError(null);
+    logInClickHandler(form);
+  };
 
   return (
     <AuthLayout
@@ -25,7 +57,8 @@ const Login = () => {
       hint="Ещё не зарегистрированы?"
       linkURL={PATH.SIGN_UP}
       linkCaption="Регистрация"
-      submitCaption="Войти"
+      submitButtonOptions={submitButtonOptions}
+      serverError={serverError}
       onSubmit={onSubmit}
     >
       <AuthInput
@@ -34,8 +67,10 @@ const Login = () => {
         id="email-login"
         name="email"
         type="email"
+        pattern={EMAIL_FIELD_PATTERN}
         placeholder="Email"
-        value={values.email}
+        value={form.email}
+        errorMessage={errors.email}
         onChange={handleChange}
       />
       <AuthInput
@@ -47,7 +82,8 @@ const Login = () => {
         name="password"
         type="password"
         placeholder="Пароль"
-        value={values.password}
+        value={form.password}
+        errorMessage={errors.password}
         onChange={handleChange}
       />
     </AuthLayout>

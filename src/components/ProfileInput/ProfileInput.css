@@ -26,6 +26,10 @@
   box-sizing: border-box;
 }
 
+.profile-input__input_type_error {
+  color: #EE3465;
+}
+
 .profile-input__input:focus {
   outline: none;
 }

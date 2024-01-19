@@ -1,12 +1,16 @@
 .movie-card {
   position: relative;
   width: 100%;
+  max-width: 364px;
+  margin: 0 auto;
   display: flex;
   justify-content: flex-start;
   flex-flow: column;
   overflow: hidden;
   border-radius: 10px;
   background: #222;
+  color: #FFF;
+  text-decoration: none;
 }
 
 .movie-card__info {

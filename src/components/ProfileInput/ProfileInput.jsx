@@ -1,18 +1,19 @@
 import { forwardRef } from "react";
 import "./ProfileInput.css"
+import { classnames } from "../../utils/helpers";
 
 const ProfileInput = forwardRef((
-  { label, htmlFor, id, className, hasSeparator, ...props },
+  { label, id, className, errorMessage, hasSeparator, ...props },
   ref
 ) => {
   return (
-    <div className={`profile-input ${hasSeparator ? 'profile-input_separated' : ''}`}>
+    <div className={classnames('profile-input', hasSeparator && 'profile-input_separated')}>
       <label className="profile-input__label" htmlFor={id}>{label}</label>
       <input
+        {...props}
         ref={ref}
         id={id}
-        {...props}
-        className={`profile-input__input ${className}`}
+        className={classnames('profile-input__input', errorMessage && 'profile-input__input_type_error', className)}
       />
     </div>
   )

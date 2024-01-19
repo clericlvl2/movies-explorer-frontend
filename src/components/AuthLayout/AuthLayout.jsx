@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import { classnames } from "../../utils/helpers";
 import "./AuthLayout.css"
 
 const AuthLayout = ({
   title,
   hint,
   linkCaption,
-  submitCaption,
   linkURL,
-  onSubmit,
-  isLoading = false,
-  children
+  submitButtonOptions,
+  serverError,
+  children,
+  onSubmit
 }) => (
   <main className="auth-layout">
     <div className="auth-layout__content">
@@ -22,11 +23,13 @@ const AuthLayout = ({
 
       <form onSubmit={onSubmit} className="auth-layout__form">
         {children}
-        <SubmitButton
-          isLoading={isLoading}
-          label={submitCaption}
-          className="auth-layout__submit-button"
-        />
+        <div className="auth-layout__submit-button-container">
+          {serverError && <span className="auth-layout__error">{serverError}</span>}
+          <SubmitButton
+            {...submitButtonOptions}
+            className={classnames('auth-layout__submit-button', serverError && 'auth-layout__submit-button_type_error')}
+          />
+        </div>
       </form>
 
       <div className="auth-layout__link-container">

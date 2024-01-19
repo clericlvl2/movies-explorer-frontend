@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Main from "../Main/Main";
 import Modal from "../Modal/Modal";
@@ -11,22 +11,54 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import UserContext from "../../contexts/UserContext";
 import { useModal } from "../../hooks/useModal";
 import { usePageLayout } from "../../hooks/usePageLayout";
-import { getPath } from "../../utils/helpers";
-import { PATH, ROUTE } from "../../utils/constants";
+import { getRoutePath, handleError } from "../../utils/helpers";
+import { LOCAL_STORAGE_KEY, PATH, ROUTE } from "../../utils/constants";
+import { useLocalStorageState } from "../../hooks/useLocalStorage";
+import mainApi from "../../utils/api/MainApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const App = () => {
-  const { isOpen, open, close } = useModal();
   const navigate = useNavigate();
-  const [isLogged, setIsLogged] = useState(true);
+  const { isOpen, open, close } = useModal();
+  const [user, setUser] = useLocalStorageState(LOCAL_STORAGE_KEY.USER, null);
 
-  const logOut = () => {
-    setIsLogged(false);
-    navigate(getPath(ROUTE.MAIN), { replace: true });
+  const isLogged = Boolean(user);
+
+  useEffect(() => {
+    checkUserAuthorization();
+  }, []);
+
+  const checkUserAuthorization = async () => {
+    if (!user) {
+      return false;
+    }
+
+    try {
+      const { data } = await mainApi.getUser();
+      const isUserLogged = Boolean(data);
+
+      if (isUserLogged) {
+        setUser(data);
+      }
+
+    } catch (err) {
+      handleError(err);
+    }
+  };
+
+  const onLogin = (data) => {
+    setUser(data);
+    navigate(getRoutePath(ROUTE.MOVIES), { replace: true });
   }
 
-  const logIn= () => {
-    setIsLogged(true);
-    navigate(getPath(ROUTE.MAIN), { replace: true });
+  const onUpdateUser = (data) => {
+    setUser(data);
+  }
+
+  const onLogOut = () => {
+    localStorage.clear();
+    setUser(null);
+    navigate(getRoutePath(ROUTE.MAIN), { replace: true });
   }
 
   const layoutProps = useMemo(() => ({
@@ -40,12 +72,12 @@ const App = () => {
   const ProtectedPageLayout = usePageLayout(layoutProps)
 
   return (
-    <UserContext.Provider value={{ isLogged, logIn }}>
+    <UserContext.Provider value={{ user, isLogged }}>
       <Routes>
         <Route
           path={ROUTE.MAIN}
           element={
-            <PageLayout onNavMenuOpen={open} isLogged={isLogged}>
+            <PageLayout onNavMenuOpen={open}>
               <Main />
             </PageLayout>
           }
@@ -62,7 +94,7 @@ const App = () => {
           path={ROUTE.SAVED_MOVIES}
           element={
             <ProtectedPageLayout>
-              <Movies isFavoriteView />
+              <Movies isSavedMovies />
             </ProtectedPageLayout>
           }
         />
@@ -70,22 +102,32 @@ const App = () => {
           path={ROUTE.PROFILE}
           element={
             <ProtectedPageLayout>
-              <Profile onLogOut={logOut} />
+              <Profile onUpdateUser={onUpdateUser} onLogOut={onLogOut} />
             </ProtectedPageLayout>
           }
         />
-        <Route path={ROUTE.SIGN_IN} element={<Login />} />
-        <Route path={ROUTE.SIGN_UP} element={<Register />} />
+        <Route
+          path={ROUTE.SIGN_IN}
+          element={
+            <ProtectedRoute hasPermission={!isLogged}>
+              <Login onLogin={onLogin} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTE.SIGN_UP}
+          element={
+            <ProtectedRoute hasPermission={!isLogged}>
+              <Register onRegister={onLogin} />
+            </ProtectedRoute>
+          }
+        />
         <Route path={ROUTE.NOT_FOUND} element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to={PATH.NOT_FOUND} replace />} />
       </Routes>
-      <Modal isOpen={isOpen} isLogged={isLogged} onClose={close} />
+      <Modal isOpen={isOpen} onClose={close} />
     </UserContext.Provider>
   );
 }
-
-/**
- * 4. роутинг (проставить ссылки)
- */
 
 export default App;

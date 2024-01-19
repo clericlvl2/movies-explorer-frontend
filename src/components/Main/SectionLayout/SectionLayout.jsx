@@ -1,5 +1,5 @@
 import "./SectionLayout.css"
-import { cn } from "../../../utils/helpers";
+import { classnames } from "../../../utils/helpers";
 
 const SectionLayout = ({
   className = '',
@@ -10,7 +10,7 @@ const SectionLayout = ({
 }) => (
   <section className={`section-layout ${className}`} id={id}>
     <div
-      className={cn(
+      className={classnames(
         'section-layout__content',
         isWideSection && 'section-layout__content_wide',
         contentClassName

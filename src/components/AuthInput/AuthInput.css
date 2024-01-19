@@ -17,12 +17,23 @@
   line-height: 16px;
 }
 
-.auth-input__input:focus {
-  font-weight: 500;
+.auth-input__input_type_error {
+  color: #EE3465;
 }
 
-.auth-input__input_error {
+.auth-input__input_type_error + .auth-input__input-error {
+  opacity: 1;
+}
+
+.auth-input__input-error {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 15px;
   color: #EE3465;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: opacity .1s;
+  opacity: 0;
 }
 
 .auth-input__label {
